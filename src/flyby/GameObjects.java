@@ -60,27 +60,71 @@ public class GameObjects
 	    
 	    if(playerObject.isPlayerControlled)
 	    {
+		// go up only
 		if(pressedActions.contains(PlayerActionsHandler.possibleActions.UP))
 		{
+		    playerObject.resetDirection();
 		    playerObject.applyActionUp();
 		    actionApplied = true;
 		}
-
+		
+		// go down only
 		if(pressedActions.contains(PlayerActionsHandler.possibleActions.DOWN))
 		{
+		    playerObject.resetDirection();
 		    playerObject.applyActionDown();
 		    actionApplied = true;
 		}
 		
+		// go left only
 		if(pressedActions.contains(PlayerActionsHandler.possibleActions.LEFT))
 		{
+		    playerObject.resetDirection();
 		    playerObject.applyActionLeft();
 		    actionApplied = true;
 		}
 
+		// go right only
 		if(pressedActions.contains(PlayerActionsHandler.possibleActions.RIGHT))
 		{
+		    playerObject.resetDirection();
 		    playerObject.applyActionRight();
+		    actionApplied = true;
+		}
+		
+		// apply top left
+		if((pressedActions.contains(PlayerActionsHandler.possibleActions.UP)) && (pressedActions.contains(PlayerActionsHandler.possibleActions.LEFT)))
+		{
+		    playerObject.resetDirection();
+		    playerObject.applyActionLeft();
+		    playerObject.applyActionUp();
+		    actionApplied = true;
+		}
+		
+		// apply top right
+		if((pressedActions.contains(PlayerActionsHandler.possibleActions.UP)) && (pressedActions.contains(PlayerActionsHandler.possibleActions.RIGHT)))
+		{
+		    playerObject.resetDirection();
+		    playerObject.applyActionRight();
+		    playerObject.applyActionUp();
+		    actionApplied = true;
+		}
+		
+		// apply down right
+		if((pressedActions.contains(PlayerActionsHandler.possibleActions.DOWN)) && (pressedActions.contains(PlayerActionsHandler.possibleActions.RIGHT)))
+		{
+		    playerObject.resetDirection();
+		    playerObject.applyActionRight();
+		    playerObject.applyActionDown();
+		    actionApplied = true;
+		}
+		
+		// apply down right
+		if((pressedActions.contains(PlayerActionsHandler.possibleActions.DOWN)) && (pressedActions.contains(PlayerActionsHandler.possibleActions.LEFT)))
+		{
+		    playerObject.resetDirection();
+		    playerObject.applyActionLeft();
+		    playerObject.applyActionDown();
 		    actionApplied = true;
 		}
 		
