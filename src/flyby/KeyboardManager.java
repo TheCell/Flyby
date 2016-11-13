@@ -21,8 +21,7 @@ public class KeyboardManager extends KeyAdapter
     
     public KeyboardManager()
     {
-	inDebug = false;
-	keysPressed = new HashMap<>();
+	this(false);
     }
     
     public KeyboardManager(boolean inDebug)
@@ -35,13 +34,10 @@ public class KeyboardManager extends KeyAdapter
     {
 	if (keysPressed.get(keycode) != null && keysPressed.get(keycode))
 	{
-	    keysPressed.put(keycode, false);
 	    return true;
 	}
-	else
-	{
-	    return false;
-	}
+	
+        return false;
     }
     
     @Override

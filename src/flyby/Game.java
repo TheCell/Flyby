@@ -38,8 +38,8 @@ public class Game
 	windowManager = new WindowMgr("Mygame");
 	window = windowManager.getWindow();
 	window.setMinimumSize(new Dimension(1024, 768));
-	//myManager = new KeyboardManager(inDebug);
-	myManager = new KeyboardManager();
+	myManager = new KeyboardManager(inDebug);
+//	myManager = new KeyboardManager();
 	window.addKeyListener(myManager);
 	
 	myGameController = new GameController();
