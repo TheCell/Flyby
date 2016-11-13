@@ -93,7 +93,8 @@ public class MovableObj
     @Override
     public String toString()
     {
-	return "PosX: " + this.objectPosition.getX() +
+	return "Object: " + this.hashCode() + 
+		" PosX: " + this.objectPosition.getX() +
 		" PosY: " + this.objectPosition.getY() +
 		" VectorX: " + this.deltaVector[0] +
 		" VectorY: " + this.deltaVector[1] +
