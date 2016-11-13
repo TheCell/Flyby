@@ -18,11 +18,6 @@ public class PhysicsUtil
     {
 	override = false;
     }
-
-    public int calcSpeedReduce(int speed)
-    {
-	return (int) slowFactor(speed);
-    }
     
     public double calcSpeedReduce(double speed)
     {
@@ -36,6 +31,11 @@ public class PhysicsUtil
     
     private double slowFactor(double speed)
     {
+	if(speed < 1)
+	{
+	    return 0;
+	}
+	
 	return Math.log(speed);
     }
     
