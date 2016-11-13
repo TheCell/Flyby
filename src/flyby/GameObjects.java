@@ -86,7 +86,7 @@ public class GameObjects
 		
 		if(!actionApplied)
 		{
-//		    playerObject.slowDown();
+		    playerObject.slowDown();
 		}
 	    }
 	}

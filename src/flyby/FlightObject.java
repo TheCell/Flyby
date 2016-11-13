@@ -159,7 +159,7 @@ public class FlightObject
     
     public void slowDown()
     {
-	movObj.setVelocityVector(physUtils.calcSpeedReduce(movObj.getVelocityVector()));
+	movObj.setVelocityVector((int) physUtils.calcSpeedReduce(movObj.getVelocityVector()));
     }
     
     public void enablePlayerControll()
