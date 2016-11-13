@@ -6,6 +6,8 @@
 
 package flyby;
 
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.Set;
 
 
@@ -20,6 +22,7 @@ public class GameController
     public GameObjects allGameObjects;
     private int gameTickLenghtMS = 32;
     private PlayerActionsHandler pActionHandler;
+    private TextureHandler textureHandler;
     
     public GameController()
     {
@@ -30,6 +33,12 @@ public class GameController
 	allGameObjects = new GameObjects(pActionHandler);
 	allGameObjects.testObjects();
 	myDrawPanel.setGameObjects(allGameObjects);
+	
+	textureHandler = TextureHandler.getInstance();
+	Path assetPath = Paths.get("").toAbsolutePath();
+	textureHandler.loadAsset(assetPath.resolve("assets").resolve("spaceShips.png"));
+	textureHandler.loadAsset(assetPath.resolve("assets").resolve("playerships.png"));
+	textureHandler.setGridSize(100);
     }
     
     public void update()

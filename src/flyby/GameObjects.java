@@ -6,7 +6,9 @@
 
 package flyby;
 
+import java.awt.Color;
 import java.awt.Graphics;
+import java.awt.image.BufferedImage;
 import java.util.LinkedList;
 import java.util.ListIterator;
 import java.util.Set;
@@ -159,7 +161,11 @@ public class GameObjects
 	    
 	    if(tempFlight.isPlayerControlled)
 	    {
-		g.fillOval(tempFlightPos.getX(), tempFlightPos.getY(), 50, 50);
+		BufferedImage playerImage = TextureHandler.getInstance().getSprite(1,0);
+		g.drawImage(playerImage, tempFlightPos.getX() - playerImage.getWidth() / 2, tempFlightPos.getY() - playerImage.getHeight() / 2, null);
+		g.setColor(Color.red);
+		g.fillOval(tempFlightPos.getX(), tempFlightPos.getY(), 5, 5);
+		g.setColor(Color.black);
 	    }
 	    else
 	    {
