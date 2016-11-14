@@ -18,7 +18,6 @@ public class FlightObject
     private Healthpoints health;
     private String name;
     public boolean isPlayerControlled;
-    private PhysicsUtil physUtils;
     
     public FlightObject()
     {
@@ -30,7 +29,6 @@ public class FlightObject
 	this.movObj = new MovableObj();
 	this.health = new Healthpoints();
 	this.name = name;
-	this.physUtils = new PhysicsUtil();
     }
     
     public FlightObject(String name, int health, int posX, int posY, int velocity)
@@ -43,7 +41,6 @@ public class FlightObject
 	this.movObj = new MovableObj(posX, posY, vectorX, vectorY, velocity);
 	this.health = new Healthpoints(health);
 	this.name = name;
-	this.physUtils = new PhysicsUtil();
     }
     
     public void changeUp()
@@ -74,7 +71,7 @@ public class FlightObject
 	
 	if(movObj.getVelocityVector() != 0)
 	{
-	    movObj.setVelocityVector(physUtils.calcSpeedup(movObj.getVelocityVector()));
+	    movObj.setVelocityVector(PhysicsUtil.calcSpeedup(movObj.getVelocityVector()));
 	}
 	else
 	{
@@ -99,7 +96,7 @@ public class FlightObject
 	
 	if(movObj.getVelocityVector() != 0)
 	{
-	    movObj.setVelocityVector(physUtils.calcSpeedup(movObj.getVelocityVector()));
+	    movObj.setVelocityVector(PhysicsUtil.calcSpeedup(movObj.getVelocityVector()));
 	}
 	else
 	{
@@ -124,7 +121,7 @@ public class FlightObject
 	
 	if(movObj.getVelocityVector() != 0)
 	{
-	    movObj.setVelocityVector(physUtils.calcSpeedup(movObj.getVelocityVector()));
+	    movObj.setVelocityVector(PhysicsUtil.calcSpeedup(movObj.getVelocityVector()));
 	}
 	else
 	{
@@ -149,7 +146,7 @@ public class FlightObject
 	
 	if(movObj.getVelocityVector() != 0)
 	{
-	    movObj.setVelocityVector(physUtils.calcSpeedup(movObj.getVelocityVector()));
+	    movObj.setVelocityVector(PhysicsUtil.calcSpeedup(movObj.getVelocityVector()));
 	}
 	else
 	{
@@ -159,7 +156,7 @@ public class FlightObject
     
     public void slowDown()
     {
-	movObj.setVelocityVector((int) physUtils.calcSpeedReduce(movObj.getVelocityVector()));
+	movObj.setVelocityVector((int) PhysicsUtil.calcSpeedReduce(movObj.getVelocityVector()));
     }
     
     public void enablePlayerControll()
