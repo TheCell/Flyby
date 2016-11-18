@@ -161,7 +161,8 @@ public class GameObjects
 	    
 	    if(tempFlight.isPlayerControlled)
 	    {
-		BufferedImage playerImage = TextureHandler.getInstance().getSprite(1,0);
+//		BufferedImage playerImage = TextureHandler.getInstance().getSprite(1,0);
+		BufferedImage playerImage = TextureHandler.getInstance().getSprite("playerships");
 		g.drawImage(playerImage, tempFlightPos.getX() - playerImage.getWidth() / 2, tempFlightPos.getY() - playerImage.getHeight() / 2, null);
 		g.setColor(Color.red);
 		g.fillOval(tempFlightPos.getX(), tempFlightPos.getY(), 5, 5);

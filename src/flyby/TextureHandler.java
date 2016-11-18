@@ -22,14 +22,12 @@ import javax.imageio.ImageIO;
 public class TextureHandler
 {
     private static TextureHandler instance = null;
-    private List<BufferedImage> spriteSheets;
-    private int gridSize;
+    private List<SpriteSheet> spriteSheets;
     
     // impossibru to call from outside
     protected TextureHandler()
     {
 	spriteSheets = new ArrayList<>();
-	gridSize = 32;
     }
     
     /**
@@ -46,54 +44,46 @@ public class TextureHandler
 	return instance;
     }
     
+    // bypass Texturehandler, fuck the System
+    public void registerSpriteSheet(SpriteSheet mySprite)
+    {
+	spriteSheets.add(mySprite);
+    }
+    
+    // load asset and check for xml, if no xml save the filename as Spritename
     public boolean loadAsset(Path assetPath)
     {
 	try
 	{
+	    String Sheetname = "";
 	    BufferedImage spriteSheet = ImageIO.read(assetPath.toFile());
-	    spriteSheets.add(spriteSheet);
+	    
+	    Sheetname = assetPath.getFileName().toString();
+	    if(Sheetname.lastIndexOf(".") > -1)
+	    {
+		Sheetname = Sheetname.substring(0, Sheetname.lastIndexOf("."));
+	    }
+	    
+	    spriteSheets.add(new SpriteSheet(spriteSheet, Sheetname));
 	    return true;
 	}
 	catch (IOException ex)
 	{
-	    BufferedImage spriteSheet = null;
 	    Logger.getLogger(TextureHandler.class.getName()).log(Level.SEVERE, null, ex);
 	    return false;
 	}
     }
     
-    /**
-     * returns the whole loaded Asset
-     * @param spriteSheetNumber
-     * @return 
-     */
-    public BufferedImage getSpriteSheet(int spriteSheetNumber)
+    public BufferedImage getSprite(String Spritename)
     {
-	return this.spriteSheets.get(spriteSheetNumber);
-    }
-    
-    /**
-     * returns the Sprite as a row
-     * @param spriteSheetNumber
-     * @param spriteNumber
-     * @return 
-     */
-    public BufferedImage getSprite(int spriteSheetNumber, int spriteNumber)
-    {
-	BufferedImage loadedSprite = spriteSheets.get(spriteSheetNumber);
-	return loadedSprite.getSubimage(0, gridSize * spriteNumber, loadedSprite.getWidth(), gridSize * spriteNumber + gridSize);
-    }
-    
-    public void setGridSize(int size)
-    {
-	if(size > 0)
+	for(int i = 0; i < spriteSheets.size(); i++)
 	{
-	    this.gridSize = size;
+	    if(spriteSheets.get(i).hasSprite(Spritename))
+	    {
+		return spriteSheets.get(i).getSprite(Spritename);
+	    }
 	}
-    }
-    
-    public int getGridSize()
-    {
-	return this.gridSize;
+	
+	return new BufferedImage(32, 32, 1);
     }
 }

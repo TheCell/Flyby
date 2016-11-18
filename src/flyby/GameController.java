@@ -38,7 +38,6 @@ public class GameController
 	Path assetPath = Paths.get("").toAbsolutePath();
 	textureHandler.loadAsset(assetPath.resolve("assets").resolve("spaceShips.png"));
 	textureHandler.loadAsset(assetPath.resolve("assets").resolve("playerships.png"));
-	textureHandler.setGridSize(100);
     }
     
     public void update()
