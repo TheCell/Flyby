@@ -12,24 +12,24 @@ package flyby;
  */
 public class PhysicsUtil
 {
-    private static boolean override;
+    private boolean override;
     
     public PhysicsUtil()
     {
 	override = false;
     }
     
-    public static double calcSpeedReduce(double speed)
+    public double calcSpeedReduce(double speed)
     {
 	return slowFactor(speed);
     }
     
-    public static int calcSpeedup(int speed)
+    public int calcSpeedup(int speed)
     {
 	return (int) speedFactor(speed);
     }
     
-    private static double slowFactor(double speed)
+    private double slowFactor(double speed)
     {
 	if(speed < 1)
 	{
@@ -39,7 +39,7 @@ public class PhysicsUtil
 	return Math.log(speed);
     }
     
-    private static double speedFactor(double speed)
+    private double speedFactor(double speed)
     {
 	if(speed == 0)
 	{
