@@ -74,13 +74,50 @@ public class TextureHandler
 	}
     }
     
-    public BufferedImage getSprite(String Spritename)
+    // load asset and check for xml, if no xml save the filename as Spritename
+    public boolean loadAsset(Path assetPath, int gridHeight, int gridWidth)
+    {
+	try
+	{
+	    String Sheetname = "";
+	    BufferedImage spriteSheet = ImageIO.read(assetPath.toFile());
+	    
+	    Sheetname = assetPath.getFileName().toString();
+	    if(Sheetname.lastIndexOf(".") > -1)
+	    {
+		Sheetname = Sheetname.substring(0, Sheetname.lastIndexOf("."));
+	    }
+	    
+	    spriteSheets.add(new SpriteSheet(spriteSheet, Sheetname, gridHeight, gridWidth));
+	    return true;
+	}
+	catch (IOException ex)
+	{
+	    Logger.getLogger(TextureHandler.class.getName()).log(Level.SEVERE, null, ex);
+	    return false;
+	}
+    }
+    
+    public BufferedImage getSprite(String spriteName)
     {
 	for(int i = 0; i < spriteSheets.size(); i++)
 	{
-	    if(spriteSheets.get(i).hasSprite(Spritename))
+	    if(spriteSheets.get(i).hasSprite(spriteName))
 	    {
-		return spriteSheets.get(i).getSprite(Spritename);
+		return spriteSheets.get(i).getSprite(spriteName);
+	    }
+	}
+	
+	return new BufferedImage(32, 32, 1);
+    }
+    
+    public BufferedImage getSpriteAnimated(String spriteName, int frame)
+    {
+	for(int i = 0; i < spriteSheets.size(); i++)
+	{
+	    if(spriteSheets.get(i).hasSprite(spriteName))
+	    {
+		return spriteSheets.get(i).getSpriteAnimationFrame(spriteName, frame);
 	    }
 	}
 	

@@ -37,7 +37,7 @@ public class GameController
 	textureHandler = TextureHandler.getInstance();
 	Path assetPath = Paths.get("").toAbsolutePath();
 	textureHandler.loadAsset(assetPath.resolve("assets").resolve("spaceShips.png"));
-	textureHandler.loadAsset(assetPath.resolve("assets").resolve("playerships.png"));
+	textureHandler.loadAsset(assetPath.resolve("assets").resolve("playerships.png"), 100, 100);
     }
     
     public void update()

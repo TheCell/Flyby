@@ -6,6 +6,7 @@
 
 package flyby;
 
+import com.sun.org.apache.xalan.internal.xsltc.compiler.sym;
 import java.awt.image.BufferedImage;
 
 /**
@@ -28,12 +29,12 @@ public class SpriteSheet
     
     public SpriteSheet(BufferedImage spriteSheet)
     {
-	this(spriteSheet, 32, 32);
+	this(spriteSheet, spriteSheet.getHeight(), spriteSheet.getWidth());
     }
     
     public SpriteSheet(BufferedImage spriteSheet, String name)
     {
-	this(spriteSheet, name, 32, 32);
+	this(spriteSheet, name, spriteSheet.getHeight(), spriteSheet.getWidth());
     }
     
     public SpriteSheet(BufferedImage spriteSheet, int gridSize)
@@ -53,6 +54,14 @@ public class SpriteSheet
     
     public SpriteSheet(BufferedImage spriteSheet, String name, int gridHeight, int gridWidth)
     {
+	if(gridHeight > spriteSheet.getHeight())
+	{
+	    gridHeight = spriteSheet.getHeight();
+	}
+	if(gridWidth > spriteSheet.getWidth())
+	{
+	    gridWidth = spriteSheet.getWidth();
+	}
 	this.spriteSheet = spriteSheet;
 	this.gridHeight = gridHeight;
 	this.gridWidth = gridWidth;
@@ -64,6 +73,32 @@ public class SpriteSheet
 	if(!hasXmlinfo && sheetName.equalsIgnoreCase(SpriteName))
 	{
 	    return spriteSheet;
+	}
+	
+	// nothing found, return empty image
+	return new BufferedImage(32, 32, 1);
+    }
+    
+    // todo
+    public BufferedImage getSpriteAnimationFrame(String spriteName, int framecounter)
+    {
+	if(!hasXmlinfo && sheetName.equalsIgnoreCase(spriteName))
+	{
+	    int possibleFrames = spriteSheet.getWidth() / gridWidth;
+	    framecounter = framecounter % possibleFrames;
+	    int leftX = gridWidth * (framecounter);
+	    int width = gridWidth;
+	    
+	    if(leftX < 0)
+	    {
+		leftX = 0;
+	    }
+	    if(width > spriteSheet.getWidth())
+	    {
+		width = spriteSheet.getWidth();
+	    }
+	    
+	    return spriteSheet.getSubimage(leftX, 0, width, gridHeight);
 	}
 	
 	// nothing found, return empty image

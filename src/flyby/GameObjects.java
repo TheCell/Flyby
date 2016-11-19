@@ -22,6 +22,7 @@ public class GameObjects
     private LinkedList<FlightObject> flightObjects;
     private ListIterator<FlightObject> flightObjIterator;
     private PlayerActionsHandler pActionsHandler;
+    private int drawCounter;
     
     public GameObjects()
     {
@@ -33,6 +34,7 @@ public class GameObjects
 	this.flightObjects = new LinkedList<>();
 	flightObjIterator = flightObjects.listIterator();
 	pActionsHandler = actionHandler;
+	drawCounter = 0;
     }
     
     public void testObjects()
@@ -162,16 +164,23 @@ public class GameObjects
 	    if(tempFlight.isPlayerControlled)
 	    {
 //		BufferedImage playerImage = TextureHandler.getInstance().getSprite(1,0);
-		BufferedImage playerImage = TextureHandler.getInstance().getSprite("playerships");
+//		BufferedImage playerImage = TextureHandler.getInstance().getSprite("playerships");
+		BufferedImage playerImage = TextureHandler.getInstance().getSpriteAnimated("playerships", drawCounter);
 		g.drawImage(playerImage, tempFlightPos.getX() - playerImage.getWidth() / 2, tempFlightPos.getY() - playerImage.getHeight() / 2, null);
-		g.setColor(Color.red);
-		g.fillOval(tempFlightPos.getX(), tempFlightPos.getY(), 5, 5);
-		g.setColor(Color.black);
 	    }
 	    else
 	    {
 		g.drawOval(tempFlightPos.getX(), tempFlightPos.getY(), 50, 50);
 	    }
+	}
+	
+	if(drawCounter > 30)
+	{
+	    drawCounter = 0;
+	}
+	else
+	{
+	    drawCounter ++;
 	}
     }
 }
