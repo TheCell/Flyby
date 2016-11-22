@@ -181,7 +181,8 @@ public class GameObjects
 		g.drawOval(tempFlightPos.getX(), tempFlightPos.getY(), 50, 50);
 	    }
 	}
-
+	
+	// update counter only when new drawcycle begins
 	if(isNewCycle())
 	{
 	    if(drawCounter > 30)
