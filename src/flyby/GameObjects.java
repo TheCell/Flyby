@@ -9,6 +9,7 @@ package flyby;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
+import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.ListIterator;
 import java.util.Set;
@@ -23,6 +24,11 @@ public class GameObjects
     private ListIterator<FlightObject> flightObjIterator;
     private PlayerActionsHandler pActionsHandler;
     private int drawCounter;
+    // list to store which anims were already displayed in the same timecycle
+    private Set<String> animationsUsed;
+    private long cycleStart;
+    // how long should a cycle be in milliseconds
+    private final int cycleLength = 62;
     
     public GameObjects()
     {
@@ -33,6 +39,8 @@ public class GameObjects
     {
 	this.flightObjects = new LinkedList<>();
 	flightObjIterator = flightObjects.listIterator();
+	animationsUsed = new HashSet<>();
+	cycleStart = System.currentTimeMillis();
 	pActionsHandler = actionHandler;
 	drawCounter = 0;
     }
@@ -173,14 +181,28 @@ public class GameObjects
 		g.drawOval(tempFlightPos.getX(), tempFlightPos.getY(), 50, 50);
 	    }
 	}
+
+	if(isNewCycle())
+	{
+	    if(drawCounter > 30)
+	    {
+		drawCounter = 0;
+	    }
+	    else
+	    {
+		drawCounter ++;
+	    }
+	}
+    }
+    
+    private boolean isNewCycle()
+    {
+	if((this.cycleStart + this.cycleLength) < System.currentTimeMillis())
+	{
+	    this.cycleStart = System.currentTimeMillis();
+	    return true;
+	}
 	
-	if(drawCounter > 30)
-	{
-	    drawCounter = 0;
-	}
-	else
-	{
-	    drawCounter ++;
-	}
+	return false;
     }
 }
