@@ -6,7 +6,6 @@
 
 package flyby;
 
-import com.sun.org.apache.xalan.internal.xsltc.compiler.sym;
 import java.awt.image.BufferedImage;
 
 /**
