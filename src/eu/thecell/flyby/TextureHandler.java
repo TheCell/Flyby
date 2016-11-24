@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 
-package flyby;
+package eu.thecell.flyby;
 
 import java.awt.image.BufferedImage;
 import java.io.IOException;

@@ -1,4 +1,4 @@
-package flyby;
+package eu.thecell.flyby;
 
 import java.util.Objects;
 
