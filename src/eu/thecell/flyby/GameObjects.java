@@ -173,12 +173,13 @@ public class GameObjects
 	    {
 //		BufferedImage playerImage = TextureHandler.getInstance().getSprite(1,0);
 //		BufferedImage playerImage = TextureHandler.getInstance().getSprite("playerships");
-		BufferedImage playerImage = TextureHandler.getInstance().getSpriteAnimated("playerships", drawCounter);
-		g.drawImage(playerImage, tempFlightPos.getX() - playerImage.getWidth() / 2, tempFlightPos.getY() - playerImage.getHeight() / 2, null);
+		BufferedImage playerShipImage = TextureHandler.getInstance().getSpriteAnimated("playerships", 0);
+		g.drawImage(playerShipImage, tempFlightPos.getX() - playerShipImage.getWidth() / 2, tempFlightPos.getY() - playerShipImage.getHeight() / 2, null);
 	    }
 	    else
 	    {
-		g.drawOval(tempFlightPos.getX(), tempFlightPos.getY(), 50, 50);
+		BufferedImage shipImage = TextureHandler.getInstance().getSpriteAnimated("playerships", drawCounter);
+		g.drawImage(shipImage, tempFlightPos.getX() - shipImage.getWidth() / 2, tempFlightPos.getY() - shipImage.getHeight() / 2, null);
 	    }
 	}
 	
