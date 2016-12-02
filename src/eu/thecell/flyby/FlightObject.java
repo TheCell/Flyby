@@ -1,15 +1,9 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
 package eu.thecell.flyby;
 
 import java.util.Objects;
 
 /**
- *
+ * Flightobject contains MovableObj, Health, Name.
  * @author simon
  */
 public class FlightObject
@@ -17,8 +11,8 @@ public class FlightObject
     private MovableObj movObj;
     private Healthpoints health;
     private String name;
-    public boolean isPlayerControlled;
     private PhysicsUtil physUtils;
+    public boolean isPlayerControlled;
     
     public FlightObject()
     {
@@ -38,6 +32,16 @@ public class FlightObject
 	this(name, health, posX, posY, 0, 0, velocity);
     }
     
+    /**
+     * Creates a new Flightobject with a name, health, a Position and Speed.
+     * @param name
+     * @param health
+     * @param posX
+     * @param posY
+     * @param vectorX
+     * @param vectorY
+     * @param velocity 
+     */
     public FlightObject(String name, int health, int posX, int posY, int vectorX, int vectorY, int velocity)
     {
 	this.movObj = new MovableObj(posX, posY, vectorX, vectorY, velocity);
@@ -46,21 +50,29 @@ public class FlightObject
 	this.physUtils = new PhysicsUtil();
     }
     
+    /**
+     * Delegates to Movableobject to update the Position.
+     */
     public void changeUp()
     {
 	movObj.updatePos();
     }
     
+    /**
+     * Sets the directions in x and y to 0.
+     */
     public void resetDirection()
     {
 	movObj.setXVector(0);
 	movObj.setYVector(0);
     }
     
+    /**
+     * Implements the logic how a FlightObject should behabe on Up command.
+     */
     public void applyActionUp()
     {
 	int yVector = movObj.getYVector();
-//	System.out.println(movObj.toString());
 	
 	if(yVector > 0)
 	{
@@ -81,11 +93,13 @@ public class FlightObject
 	    movObj.setVelocityVector(2);
 	}
     }
-    
+
+    /**
+     * Implements the logic how a FlightObject should behabe on Down command.
+     */
     public void applyActionDown()
     {
 	int yVector = movObj.getYVector();
-//	System.out.println(movObj.toString());
 	
 	if(yVector < 0)
 	{
@@ -107,10 +121,12 @@ public class FlightObject
 	}
     }
     
+    /**
+     * Implements the logic how a FlightObject should behabe on Right command.
+     */
     public void applyActionRight()
     {
 	int xVector = movObj.getXVector();
-//	System.out.println(movObj.toString());
 	
 	if(xVector < 0)
 	{
@@ -132,10 +148,12 @@ public class FlightObject
 	}
     }
     
+    /**
+     * Implements the logic how a FlightObject should behabe on Left command.
+     */
     public void applyActionLeft()
     {
 	int xVector = movObj.getXVector();
-//	System.out.println(movObj.toString());
 	
 	if(xVector > 0)
 	{
@@ -156,38 +174,64 @@ public class FlightObject
 	    movObj.setVelocityVector(2);
 	}
     }
-    
+
+    /**
+     * gradually slows speed down to 0.
+     */
     public void slowDown()
     {
 	movObj.setVelocityVector((int) physUtils.calcSpeedReduce(movObj.getVelocityVector()));
     }
     
+    /**
+     * Sets Boolean isPlayerControlled to true;
+     */
     public void enablePlayerControll()
     {
 	this.isPlayerControlled = true;
     }
     
+    /**
+     * Updates the position of the Object based on the speed and direction vectors.
+     */
     public void updateFlightObject()
     {
 	movObj.updatePos();
     }
     
+    /**
+     * Returns current Position of the FlightObject.
+     * @return Position
+     */
     public Position getPosition()
     {
 	return this.movObj.getPosition();
     }
     
+    /**
+     * Returns if it is PlayerControlled.
+     * @return boolean
+     */
     public boolean isPlayerControlled()
     {
 	return this.isPlayerControlled;
     }
     
+    /**
+     * Contains Name, Health and movableObject String.
+     * @return String
+     */
     @Override
     public String toString()
     {
 	return "Name: " + name + " Health: " + health.getHealth() + " " + movObj.toString();
     }
     
+    /**
+     * Checks wether the Object is the Same based on the included Attributes.
+     * @param o
+     * @return boolean true if it is equal
+     */
     @Override
     public boolean equals(Object o)
     {
@@ -205,6 +249,10 @@ public class FlightObject
 	return movObj.equals(tempFlight.movObj) && health.equals(tempFlight.health) && name.equals(tempFlight.name);
     }
     
+    /**
+     * Hashcode based on MovableObject, Health and Name.
+     * @return int hashCode
+     */
     @Override
     public int hashCode()
     {
