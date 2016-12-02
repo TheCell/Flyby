@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package eu.thecell.flyby;
 
 import java.util.Collections;
@@ -10,7 +5,7 @@ import java.util.Set;
 import java.util.TreeSet;
 
 /**
- *
+ * Main method and game logic. Handle Controlls, update everything and then display changes.
  * @author simon
  */
 public class Flyby
@@ -33,19 +28,6 @@ public class Flyby
 		inDebug = true;
 	    }
 	}
-		
-	/*
-	if (args.length > 0)
-	{
-	    for(String param : args)
-	    {
-		if (param.equals("-debug"))
-		{
-		    inDebug = true;
-		}
-	    }
-	}
-	*/
 	
 	Game flyGame = new Game(inDebug);
 	flyGame.init();
