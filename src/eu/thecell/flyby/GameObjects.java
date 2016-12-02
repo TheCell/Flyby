@@ -1,12 +1,5 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
 package eu.thecell.flyby;
 
-import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 import java.util.HashSet;
@@ -15,7 +8,7 @@ import java.util.ListIterator;
 import java.util.Set;
 
 /**
- *
+ * Holds all Gameobjects like FlightObjects.
  * @author simon
  */
 public class GameObjects
@@ -54,12 +47,19 @@ public class GameObjects
 	flightObjects.getLast().enablePlayerControll();
     }
     
+    /**
+     * updates the PlayerControlled Objects, applies Physics after controllupdate.
+     */
     public void updatePhysics()
     {
 	updatePlayerControlledFlightObjects();
 	applyPhysics();
     }
     
+    /**
+     * Checks the Keyboardinputs and sets the Direction of all Playercontrolled
+     * Objects.
+     */
     private void updatePlayerControlledFlightObjects()
     {
 	flightObjIterator = flightObjects.listIterator();
@@ -140,6 +140,9 @@ public class GameObjects
 		    actionApplied = true;
 		}
 		
+		/**
+		 * If the user does not input, slow the Flightobject down until delta Velocity is 0.
+		 */
 		if(!actionApplied)
 		{
 		    playerObject.slowDown();
@@ -148,6 +151,9 @@ public class GameObjects
 	}
     }
     
+    /**
+     * Iterates all Flightobjects and updates them.
+     */
     private void applyPhysics()
     {
 	flightObjIterator = flightObjects.listIterator();
@@ -171,8 +177,6 @@ public class GameObjects
 	    
 	    if(tempFlight.isPlayerControlled)
 	    {
-//		BufferedImage playerImage = TextureHandler.getInstance().getSprite(1,0);
-//		BufferedImage playerImage = TextureHandler.getInstance().getSprite("playerships");
 		BufferedImage playerShipImage = TextureHandler.getInstance().getSpriteAnimated("playerships", 0);
 		g.drawImage(playerShipImage, tempFlightPos.getX() - playerShipImage.getWidth() / 2, tempFlightPos.getY() - playerShipImage.getHeight() / 2, null);
 	    }
@@ -196,7 +200,11 @@ public class GameObjects
 	    }
 	}
     }
-    
+
+    /**
+     * Checks the current Cycle based on the defined Cycle length.
+     * @return 
+     */
     private boolean isNewCycle()
     {
 	if((this.cycleStart + this.cycleLength) < System.currentTimeMillis())
