@@ -12,7 +12,8 @@ import java.util.Set;
 
 
 /**
- *
+ * Delegates the draw, updates Physics, starts the PlayerActionsHandler,
+ * holds the amount of Gameticks. Controlls the flow of the Application. 
  * @author simon
  */
 public class GameController
@@ -24,6 +25,9 @@ public class GameController
     private PlayerActionsHandler pActionHandler;
     private TextureHandler textureHandler;
     
+    /**
+     * Creates DrawPanel, PlayerActionsHandler, GameObjects
+     */
     public GameController()
     {
 	lastTick = System.currentTimeMillis();
@@ -40,55 +44,44 @@ public class GameController
 	textureHandler.loadAsset(assetPath.resolve("assets").resolve("playerships.png"), 100, 100);
     }
     
+    /**
+     * update physics, empty Actionhandler Actions.
+     */
     public void update()
     {
 	if(isGameTick())
 	{
 	    Set pressedActions = pActionHandler.getPressedActions();
 
-	    // do player controlls
-	    if(pressedActions.contains(PlayerActionsHandler.possibleActions.UP))
-	    {
-//		allGameObjects.moveTestObjects();
-	    }
-	    
-	    if(pressedActions.contains(PlayerActionsHandler.possibleActions.DOWN))
-	    {
-//		allGameObjects.moveTestObjects();
-	    }
-	    
-	    if(pressedActions.contains(PlayerActionsHandler.possibleActions.LEFT))
-	    {
-//		allGameObjects.moveTestObjects();
-	    }
-	    
-	    if(pressedActions.contains(PlayerActionsHandler.possibleActions.RIGHT))
-	    {
-//		allGameObjects.moveTestObjects();
-	    }
-	    
-	    if(pressedActions.contains(PlayerActionsHandler.possibleActions.SHOOT))
-	    {
-//		allGameObjects.moveTestObjects();
-	    }
-	    
-	    // do "physics"
 	    allGameObjects.updatePhysics();
 	    
 	    pActionHandler.emptyActions();
 	}
     }
     
+    /**
+     * Returns the Actionhandler to manage keyinputs outside of this class.
+     * @return PlayerActionsHandler
+     */
     public PlayerActionsHandler getActionHandler()
     {
 	return pActionHandler;
     }
     
+    /**
+     * Used to register the Panel in the Window.
+     * @return DrawPanel
+     */
     public DrawPanel getDrawPanel()
     {
 	return this.myDrawPanel;
     }
     
+    /**
+     * True if the Method is called after a new gameTick started and the Method was not
+     * called already once. Gametick length is defined in this Class with gameTickLenghtMS.
+     * @return boolean
+     */
     private boolean isGameTick()
     {
 	if(System.currentTimeMillis() > (lastTick + gameTickLenghtMS))
