@@ -10,7 +10,8 @@ import java.awt.event.KeyEvent;
 import javax.swing.JFrame;
 
 /**
- *
+ * Game Class that initializes the Window, and delegates Keypresses
+ * and Gamecontrollers.
  * @author simon
  */
 public class Game
@@ -21,7 +22,6 @@ public class Game
     private KeyboardManager myManager;
     private GameController myGameController;
     private PlayerActionsHandler pActionHandler;
-//    int testi = 0;
     
     public Game()
     {
@@ -33,6 +33,9 @@ public class Game
 	this.inDebug = inDebug;
     }
     
+    /**
+     * Starts the initialisation of this class, Creates the Window and adds the Keylistener
+     */
     public void init()
     {
 	windowManager = new WindowMgr("Mygame");
@@ -50,14 +53,15 @@ public class Game
 	window.pack();
     }
     
+    /**
+     * register the pressed Keys at the ActionHandler. Pressed keys are registered at the
+     * KeyboardManager.
+     */
     public void controlls()
     {
 	if(myManager.isKeyPressed(KeyEvent.VK_W) || myManager.isKeyPressed(KeyEvent.VK_UP))
 	{
 	    pActionHandler.activateAction(PlayerActionsHandler.possibleActions.UP);
-//	    this.testi ++;
-//	    myGameController.playerPressUp();
-//	    myDrawPanel.updateRight(this.testi);
 	}
 	
 	if(myManager.isKeyPressed(KeyEvent.VK_S) || myManager.isKeyPressed(KeyEvent.VK_DOWN))
@@ -81,15 +85,20 @@ public class Game
 	}
     }
     
+    /**
+     * Tells the Gamecontroller to apply updates.
+     */
     public void update()
     {
 	myGameController.update();
     }
     
+    /**
+     * repaint the whole window.
+     */
     public void display()
     {
 	window.repaint();
 	window.pack();
-	//window.setVisible(true);
     }
 }
