@@ -1,5 +1,7 @@
 package eu.thecell.flyby;
 
+import java.awt.Graphics;
+import java.awt.image.BufferedImage;
 import java.util.Objects;
 
 /**
@@ -12,6 +14,7 @@ public class FlightObject
     private Healthpoints health;
     private String name;
     private PhysicsUtil physUtils;
+    private String shipSprite;
     public boolean isPlayerControlled;
     
     public FlightObject()
@@ -25,6 +28,7 @@ public class FlightObject
 	this.health = new Healthpoints();
 	this.name = name;
 	this.physUtils = new PhysicsUtil();
+	this.shipSprite = "playerships";
     }
     
     public FlightObject(String name, int health, int posX, int posY, int velocity)
@@ -48,6 +52,16 @@ public class FlightObject
 	this.health = new Healthpoints(health);
 	this.name = name;
 	this.physUtils = new PhysicsUtil();
+	this.shipSprite = "playerships";
+    }
+    
+    /**
+     * set the Ship sprite
+     * @param String newSpriteName 
+     */
+    public void changeSprite(String newSpriteName)
+    {
+	this.shipSprite = newSpriteName;
     }
     
     /**
@@ -215,6 +229,19 @@ public class FlightObject
     public boolean isPlayerControlled()
     {
 	return this.isPlayerControlled;
+    }
+    
+    /**
+     * call draw to delegate the draw job to the object
+     * @param Graphics g pane to draw on
+     * @param int frame animation Frame to draw to
+     */
+    public void draw(Graphics g, int frame)
+    {
+	Position tempFlightPos = getPosition();
+	
+	BufferedImage playerShipImage = TextureHandler.getInstance().getSpriteAnimated("playerships", frame);
+	g.drawImage(playerShipImage, tempFlightPos.getX() - playerShipImage.getWidth() / 2, tempFlightPos.getY() - playerShipImage.getHeight() / 2, null);
     }
     
     /**
