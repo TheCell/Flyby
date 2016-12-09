@@ -173,19 +173,14 @@ public class GameObjects
 	while(flightObjIterator.hasNext())
 	{
 	    FlightObject tempFlight = flightObjIterator.next();
-//	    Position tempFlightPos = tempFlight.getPosition();
 	    
 	    if(tempFlight.isPlayerControlled)
 	    {
-//		BufferedImage playerShipImage = TextureHandler.getInstance().getSpriteAnimated("playerships", 0);
-//		g.drawImage(playerShipImage, tempFlightPos.getX() - playerShipImage.getWidth() / 2, tempFlightPos.getY() - playerShipImage.getHeight() / 2, null);
 		tempFlight.draw(g, 0);
 	    }
 	    else
 	    {
 		tempFlight.draw(g, drawCounter);
-//		BufferedImage shipImage = TextureHandler.getInstance().getSpriteAnimated("playerships", drawCounter);
-//		g.drawImage(shipImage, tempFlightPos.getX() - shipImage.getWidth() / 2, tempFlightPos.getY() - shipImage.getHeight() / 2, null);
 	    }
 	}
 	
