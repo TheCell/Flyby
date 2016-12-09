@@ -57,9 +57,9 @@ public class PhysicsUtil
 	}
 	else
 	{
-	    if (newSpeed > 10)
+	    if (newSpeed > 15)
 	    {
-		return 10;
+		return 15;
 	    }
 	    else
 	    {
